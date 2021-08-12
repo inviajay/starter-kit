@@ -10,11 +10,15 @@ ENV NODE_ENV=production
 # create app directory
 WORKDIR /usr/src/app
 
+# setup yarn
+RUN yarn set version 3.0.1
+RUN echo "nodeLinker: node-modules" >> .yarnrc.yaml
+
 # copy everything we need from the builder to install dependencies
 COPY --chown=node:node package.json yarn.lock ./
 
 # install dependencies with frozen lockfile
-RUN yarn install --frozen-lockfile --production
+RUN yarn install --immutable
 
 # copy everything else
 COPY --chown=node:node . .

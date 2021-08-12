@@ -10,7 +10,7 @@ const getBabelRule = (isServer = false) => {
 
     return {
         test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
+        exclude: /node_modules|\.yarn/,
         use: [
             {
                 loader: require.resolve('babel-loader'),

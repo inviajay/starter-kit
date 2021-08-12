@@ -213,6 +213,7 @@ module.exports = {
     },
 
     settings: {
+        'import/external-module-folders': ['.yarn'],
         'import/resolver': {
             node: {
                 extensions: ['.mjs', '.csj', '.js', '.ts', '.tsx', '.json'],

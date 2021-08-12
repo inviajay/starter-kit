@@ -101,6 +101,10 @@ module.exports = (api, options = {}) => {
                     helpers: true,
                     regenerator: true,
                     useESModules: supportsESM && presetEnvConfig.modules !== 'commonjs',
+                    // By default, babel assumes babel/runtime version 7.0.0-beta.0,
+                    // explicitly resolving to match the provided helper functions.
+                    // https://github.com/babel/babel/issues/10261
+                    version: require('@babel/runtime/package.json').version,
                     absoluteRuntime: isBabelLoader
                         ? dirname(require.resolve('@babel/runtime/package.json'))
                         : undefined,

@@ -25,7 +25,7 @@ const {
 
 const graphqlRule = {
     test: /\.graphql$/,
-    exclude: /node_modules/,
+    exclude: /node_modules|\.yarn/,
     loader: require.resolve('graphql-tag/loader'),
 };
 
@@ -50,7 +50,14 @@ const serverConfig = {
         },
     },
 
-    externals: ['./manifest.json', nodeExternals()],
+    externalsPresets: { node: true },
+
+    externals: [
+        './manifest.json',
+        nodeExternals({
+            additionalModuleDirs: ['.yarn'],
+        }),
+    ],
 
     output: {
         path: path.resolve(rootDirname, 'build'),

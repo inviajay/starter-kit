@@ -43,15 +43,16 @@ jobs:
                       - yarn-cache-node16
             - run:
                   name: Install depdencies
-                  command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+                  command: yarn install --immutable --immutable-cache --check-cache
             - save_cache:
                   key: yarn-cache-node16-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
                   paths:
-                      - ~/.cache/yarn
+                    - .yarn/cache
+                    - .yarn/unplugged
             - persist_to_workspace:
                   root: ~/project
                   paths:
-                      - node_modules
+                      - .yarn
 
     validate-project:
         executor: node-with-dependencies
